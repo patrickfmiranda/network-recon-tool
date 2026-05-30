@@ -11,6 +11,7 @@ from datetime import datetime
 from colorama import Fore, Style, init
 from src.scanners.port_scanner import PortScanner
 from src.scanners.banner_grabber import grab_banner
+from src.reporters.html_reporter import generate_html_report
 
 init(autoreset=True)
 
@@ -22,7 +23,7 @@ BANNER = f"""
   ██║╚██╗██║██╔══██╗   ██║   
   ██║ ╚████║██║  ██║   ██║   
   ╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝ 
-  Network Recon Tool v1.0
+  Network Recon Tool v1.1
   github.com/patrickfmiranda/networkrecon-tool
 {Style.RESET_ALL}"""
 
@@ -66,18 +67,25 @@ def main():
 
     print(f"\n{Fore.GREEN}[+] {len(open_ports)} open ports | Time: {duration}s{Style.RESET_ALL}")
 
-    # save JSON if asked
     if args.output:
         report = {
-            "target":     args.target,
-            "scan_time":  start_time.isoformat(),
+            "target": args.target,
+            "scan_time": start_time.isoformat(),
             "duration_s": duration,
             "open_ports": open_ports,
-            "services":   services,
+            "services": services,
         }
-        with open(args.output, "w") as f:
-            json.dump(report, f, indent=2)
-        print(f"{Fore.CYAN}[*] Report saved: {args.output}{Style.RESET_ALL}")
+
+        # JSON
+        if args.output.endswith(".json"):
+            with open(args.output, "w") as f:
+                json.dump(report, f, indent=2)
+            print(f"{Fore.CYAN}[*] JSON report saved: {args.output}{Style.RESET_ALL}")
+
+        # HTML
+        elif args.output.endswith(".html"):
+            generate_html_report(report, args.output)
+            print(f"{Fore.CYAN}[*] HTML report saved: {args.output}{Style.RESET_ALL}")
 
 if __name__ == "__main__":
     main()
