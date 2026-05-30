@@ -32,6 +32,7 @@ via banner grabbing, and exports results to JSON.
 
 ## 📁 Project Structure
 network-recon-tool/
+```
 ├── main.py                     # CLI entry point
 ├── requirements.txt
 ├── src/
@@ -44,6 +45,7 @@ network-recon-tool/
 │       └── helpers.py
 └── tests/
 └── test_scanner.py
+```
 ---
 
 ## 🚀 Installation
