@@ -131,3 +131,4 @@ Never use this tool against systems without explicit permission.
 **Patrick Miranda**  
 [GitHub](https://github.com/patrickfmiranda) • 
 [LinkedIn](https://linkedin.com/in/patrickfmiranda) •
+[TryHackMe](https://tryhackme.com/p/patrickfmiranda)
